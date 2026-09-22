@@ -5,4 +5,4 @@ def emotion_detector(text_to_analyze):
     Headers = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
     jsonObj = { "raw_document": { "text": text_to_analyze } }
     response = requests.post(url, json = jsonObj, headers=Headers)
-    return response.textimport requests
+    return response.text
