@@ -8,15 +8,12 @@ def sent_detector():
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
     
-    dom_emotion = ""
+    dom_emotion = None
     emotions = []
 
     for key, value in response.items():
         if key == "dominant_emotion":
-            if value is None:
-                return "Invalid text! Please try again!"
-            else:
-                dom_emotion = "<b>"+value+"</b>"
+            dom_emotion = "<b>"+value+"</b>"
         else:
             emotions.append(f"'{key}': {value}")
 
