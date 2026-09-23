@@ -7,8 +7,20 @@ app = Flask("Emotion Analyzer")
 def sent_detector():
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
+    
+    #emotion_result = "\n".join(f"{key}: {value}" for key, value in response.items())
+    dom_emotion = None
+    emotions = []
 
-    return "For the given statement, the system response is." , response
+    for key, value in response.items():
+        if key == "dominant_emotion":
+            dom_emotion = value
+        else:
+            emotions.append(f"{key}: {value}")
+
+    emotion_result = "\n".join(emotions)
+
+    return "For the given statement, the system response is." , emotion_result, "The dominant emotion is ", dom_emotion ,"."
 
 @app.route("/")
 def render_index_page():
